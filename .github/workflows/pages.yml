@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       renew_certificate:
-        description: "Die Demo-Domain einmalig entfernen und sofort wieder setzen, um ihr Zertifikat neu anzufordern"
+        description: "Demo-Zertifikat einmalig neu anfordern (benötigt Repository-Secret PAGES_ADMIN_TOKEN)"
         type: boolean
         default: false
 
@@ -28,10 +28,12 @@ jobs:
     steps:
       - name: Demo-Zertifikat einmalig neu anfordern
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.PAGES_ADMIN_TOKEN }}
         run: |
           python3 - <<'PY'
           import json, os, time, urllib.error, urllib.request
+          if not os.environ.get('GH_TOKEN'):
+              raise SystemExit('::error title=Pages-Berechtigung::Repository-Secret PAGES_ADMIN_TOKEN mit Pages:write und Administration:write erforderlich; keine Domainänderung vorgenommen')
           assert os.environ['GITHUB_REPOSITORY'] == 'mat-ai-sch/kundenzettel-demo'
           endpoint = 'https://api.github.com/repos/' + os.environ['GITHUB_REPOSITORY'] + '/pages'
           hostname = 'demo.kundenzettel.de'
@@ -145,7 +147,6 @@ jobs:
       - name: Beide HTTPS-Adressen live prüfen
         env:
           EXPECTED_SOURCE_COMMIT: ${{ needs.build.outputs.source_commit }}
-          GH_TOKEN: ${{ github.token }}
         run: |
           python3 - <<'PY'
           import json, os, time, urllib.request, urllib.parse
@@ -175,4 +176,13 @@ jobs:
                   print('DNS, Zertifikat oder Pages-Veröffentlichung noch nicht bereit:', type(error).__name__)
                   time.sleep(10)
           PY
-          gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -F https_enforced=true
+      - name: HTTPS nach einer Zertifikatserneuerung aktivieren
+        if: github.event_name == 'workflow_dispatch' && inputs.renew_certificate
+        env:
+          GH_TOKEN: ${{ secrets.PAGES_ADMIN_TOKEN }}
+        run: gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -F https_enforced=true
+      - name: HTTPS-Erzwingung bestätigen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .https_enforced)" = "true"
