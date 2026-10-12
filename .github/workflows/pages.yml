@@ -15,34 +15,42 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      source_commit: ${{ steps.release.outputs.source_commit }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          repository: mat-ai-sch/kundenzettel-website
-          ref: main
-          path: website
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: npm
-          cache-dependency-path: website/portal/package-lock.json
-      - run: npm ci
-        working-directory: website/portal
-      - run: npm run build
-        working-directory: website/portal
-        env:
-          VITE_PUBLIC_SURFACE: whatsapp
-          VITE_RUNTIME_MODE: preview
-          VITE_BASE_PATH: /
-      - run: test -f website/portal/dist/index.html
+      - name: Statische Veröffentlichung prüfen
+        id: release
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          import json, os
+          root = Path('site')
+          release = json.loads((root / 'release.json').read_text())
+          assert release['mode'] == 'static-preview'
+          assert release['sourceBranch'] == 'feat/kundenzettel-ui-kit-demo'
+          assert (root / 'index.html').is_file()
+          assert (root / 'impressum/index.html').is_file()
+          assert (root / 'datenschutz/index.html').is_file()
+          assert (root / 'CNAME').read_text().strip() == 'demo.kundenzettel.de'
+          for item in release['files']:
+              path = (root / item['path']).resolve()
+              assert root.resolve() in path.parents
+              assert sha256(path.read_bytes()).hexdigest() == item['sha256'], item['path']
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('source_commit=' + release['sourceCommit'] + '\n')
+          print('Geprüfter Quellstand:', release['sourceCommit'])
+          PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: website/portal/dist
+          path: site
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -52,3 +60,29 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Beide HTTPS-Adressen live prüfen
+        env:
+          EXPECTED_SOURCE_COMMIT: ${{ needs.build.outputs.source_commit }}
+        run: |
+          python3 - <<'PY'
+          import json, os, time, urllib.request, urllib.parse
+          expected = os.environ['EXPECTED_SOURCE_COMMIT']
+          for attempt in range(60):
+              try:
+                  for host in ['demo.kundenzettel.de', 'www.demo.kundenzettel.de']:
+                      url = f'https://{host}/release.json?verify={expected}'
+                      request = urllib.request.Request(url, headers={'Cache-Control': 'no-cache'})
+                      with urllib.request.urlopen(request, timeout=15) as response:
+                          release = json.load(response)
+                          assert response.status == 200
+                          assert urllib.parse.urlsplit(response.url).hostname == 'demo.kundenzettel.de'
+                      assert release['sourceCommit'] == expected
+                      assert release['mode'] == 'static-preview'
+                  print('Beide HTTPS-Adressen liefern den geprüften Demo-Quellstand:', expected)
+                  break
+              except Exception as error:
+                  if attempt == 59:
+                      raise
+                  print('DNS, Zertifikat oder Pages-Veröffentlichung noch nicht bereit:', type(error).__name__)
+                  time.sleep(10)
+          PY

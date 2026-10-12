@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-12T04:11:49.468824+00:00",
+  "sourceCommit": "0c1d99c108081b401fac2415cf5dd517a58948fe",
+  "sourceBranch": "feat/kundenzettel-ui-kit-demo",
+  "mode": "static-preview",
+  "hostname": "demo.kundenzettel.de",
+  "files": [
+    {
+      "path": ".nojekyll",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CNAME",
+      "sha256": "a7979d2fedcaefc0d887d4f9de37ff3fe5151aae6ad702bced5e619a36342804"
+    },
+    {
+      "path": "assets/index-Bm35vHEc.css",
+      "sha256": "6810e7093d4c8f9758be18f74740ff3d34c0344ea2946a3413cbb2dcc6345684"
+    },
+    {
+      "path": "assets/index-cAUVSD_z.js",
+      "sha256": "7de1d24230715df2cd41da39f7d9334850deac3c106b2d163b72e0366b5c9d5d"
+    },
+    {
+      "path": "assets/inter-latin-400-normal-C38fXH4l.woff2",
+      "sha256": "8909904ab6c872eb994093482a88a28eca2cd95912d7b6fecd72103b0dc07edc"
+    },
+    {
+      "path": "assets/inter-latin-500-normal-Cerq10X2.woff2",
+      "sha256": "f3779f1efccc4bdcdf9c0a02ab95bf6bd092ed09c48c08cedc725889edd1d19f"
+    },
+    {
+      "path": "assets/inter-latin-600-normal-LgqL8muc.woff2",
+      "sha256": "f9a06e79cd3a2a20951c0f0e28f66dd0e6d3fda73911d640a2125c8fcb78f21a"
+    },
+    {
+      "path": "datenschutz/index.html",
+      "sha256": "27b84b0c24e2e9cd3b43023b388c5822b178424e62c6cc3acc019f3620147e0b"
+    },
+    {
+      "path": "demo-audio/event-floristik.mp3",
+      "sha256": "230de24cee534f1f279ffb3133f20b69e18d73bbd04dc598c06a5fce0134ca5f"
+    },
+    {
+      "path": "demo-audio/event-floristik.ogg",
+      "sha256": "5a1e877c052f693a8296f7c5f8d90d6704e10b78588e00c6d4ba1d478806a5dc"
+    },
+    {
+      "path": "demo-audio/eventplanung.mp3",
+      "sha256": "6d629fd66cfd0c7e3eb963c580bfa61af40c6c43f15c46bd8250a84f41b84dfe"
+    },
+    {
+      "path": "demo-audio/eventplanung.ogg",
+      "sha256": "e21c376b4d8bd5fde350f1dedf8dccd7d7fbb4b2dd937f253459c84426a4e3b5"
+    },
+    {
+      "path": "demo-audio/floristik.mp3",
+      "sha256": "469f2bd58e5cab45ebace1af08d860621e37abb3670a499ce54ca04e28086d45"
+    },
+    {
+      "path": "demo-audio/floristik.ogg",
+      "sha256": "caa5e49e6ce528e5f85d34e14e3e5aaeae7a4994e8727ff6edf201226d44387a"
+    },
+    {
+      "path": "demo-audio/malerbetrieb.mp3",
+      "sha256": "1da5e20b0a4e7bf81b4c0e7018ad90ae7d6bbf6e6da032f3c8db7147fa7c2e96"
+    },
+    {
+      "path": "demo-audio/malerbetrieb.ogg",
+      "sha256": "72866c23dd00e8ef0c23560babc977d9522b58ad831cf56cf56392cdd5e5d6f8"
+    },
+    {
+      "path": "demo-audio/manifest.json",
+      "sha256": "e6df857f68c1e6f67b069e27970f49a417f5c9b081d10b2a9201d973b9cfa3d8"
+    },
+    {
+      "path": "impressum/index.html",
+      "sha256": "6f05f20d67c99e0fc3fc68b3d3fee6bcc34a6d2283300d30cd61f8e10ad7e7b5"
+    },
+    {
+      "path": "index.html",
+      "sha256": "207dd3af68073b54658cb48c03ea5f164598e482fdad836a00d1863594915ebc"
+    },
+    {
+      "path": "licenses/Coolicons-NOTICE.md",
+      "sha256": "3f510abd029ae7c9b6f44f3bcc4b51533c32c0292ff48722b4faed529d8f733e"
+    },
+    {
+      "path": "licenses/Inter-LICENSE.txt",
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "rechtliches.css",
+      "sha256": "48670d953b8edf5fcab074940d2da0e1844da3a7e96786eee8a747dcd0b73b20"
+    }
+  ]
+}

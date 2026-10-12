@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 1,
+  "scope": "demo-only",
+  "description": "Vier vom Nutzer zur Demo-Integration bereitgestellte Audiofälle. Originale und Wiedergabederivate bleiben getrennt.",
+  "publication": {
+    "deploymentPerformed": false,
+    "description": "Nur lokale Repository-Assets vorbereitet; Originale und Derivate wurden durch diesen Arbeitsschritt nicht öffentlich deployt."
+  },
+  "verificationTools": {
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 7.1.5-0+deb13u1 Copyright (c) 2007-2026 the FFmpeg developers"
+  },
+  "assets": [
+    {
+      "id": "floristik",
+      "label": "Floristik",
+      "provenance": {
+        "kind": "stored-user-demo-test",
+        "description": "Vom Nutzer bereitgestellte Originalaufnahme eines gespeicherten Demotests; Originalhash mit den gespeicherten Reportständen abgeglichen.",
+        "sourceFileName": "Floristik.ogg",
+        "sourceTestId": "4b717929-b92f-4ec1-b219-9d10641767d3",
+        "originalHashMatchesStoredReports": true,
+        "originalBytesPreserved": true,
+        "noNewProviderRequest": true
+      },
+      "original": {
+        "path": "/demo-audio/floristik.ogg",
+        "sha256": "caa5e49e6ce528e5f85d34e14e3e5aaeae7a4994e8727ff6edf201226d44387a",
+        "bytes": 44541,
+        "mimeType": "audio/ogg",
+        "container": "ogg",
+        "codec": "opus",
+        "sampleRateHz": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "streamStartTimeSeconds": 0.0065,
+        "containerDurationSeconds": 19.0465,
+        "decodedDurationSeconds": 19.0335,
+        "decodedSampleFrames": 913608,
+        "decodeVerification": {
+          "complete": true,
+          "decoderExitCode": 0,
+          "decoderErrors": [],
+          "pcmFormat": "signed 16-bit little-endian",
+          "sampleRateHz": 48000,
+          "channels": 1
+        }
+      },
+      "derivative": {
+        "path": "/demo-audio/floristik.mp3",
+        "sha256": "469f2bd58e5cab45ebace1af08d860621e37abb3670a499ce54ca04e28086d45",
+        "bytes": 152832,
+        "mimeType": "audio/mpeg",
+        "container": "mp3",
+        "codec": "mp3",
+        "sampleRateHz": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "streamStartTimeSeconds": 0.023021,
+        "containerDurationSeconds": 19.08,
+        "decodedDurationSeconds": 19.0335,
+        "decodedSampleFrames": 913608,
+        "decodeVerification": {
+          "complete": true,
+          "decoderExitCode": 0,
+          "decoderErrors": [],
+          "pcmFormat": "signed 16-bit little-endian",
+          "sampleRateHz": 48000,
+          "channels": 1
+        },
+        "derivedFromSha256": "caa5e49e6ce528e5f85d34e14e3e5aaeae7a4994e8727ff6edf201226d44387a",
+        "transformation": {
+          "tool": "ffmpeg",
+          "version": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "input": "Original-Ogg dieser Asset-ID",
+          "settings": [
+            "-map",
+            "0:a:0",
+            "-map_metadata",
+            "-1",
+            "-ac",
+            "1",
+            "-ar",
+            "48000",
+            "-c:a",
+            "libmp3lame",
+            "-b:a",
+            "64k",
+            "-id3v2_version",
+            "0",
+            "-write_id3v1",
+            "0",
+            "-f",
+            "mp3"
+          ],
+          "purpose": "MP3-Wiedergabefallback; verlustbehaftetes Derivat, kein ASR-Eingang",
+          "metadataRemoved": true
+        }
+      }
+    },
+    {
+      "id": "malerbetrieb",
+      "label": "Malerbetrieb",
+      "provenance": {
+        "kind": "stored-user-demo-test",
+        "description": "Vom Nutzer bereitgestellte Originalaufnahme eines gespeicherten Demotests; Originalhash mit den gespeicherten Reportständen abgeglichen.",
+        "sourceFileName": "Malerbetrieb.ogg",
+        "sourceTestId": "9d7cb077-1d30-403a-b6c8-5c2e2ef0138a",
+        "originalHashMatchesStoredReports": true,
+        "originalBytesPreserved": true,
+        "noNewProviderRequest": true
+      },
+      "original": {
+        "path": "/demo-audio/malerbetrieb.ogg",
+        "sha256": "72866c23dd00e8ef0c23560babc977d9522b58ad831cf56cf56392cdd5e5d6f8",
+        "bytes": 77920,
+        "mimeType": "audio/ogg",
+        "container": "ogg",
+        "codec": "opus",
+        "sampleRateHz": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "streamStartTimeSeconds": 0.0065,
+        "containerDurationSeconds": 32.0865,
+        "decodedDurationSeconds": 32.0735,
+        "decodedSampleFrames": 1539528,
+        "decodeVerification": {
+          "complete": true,
+          "decoderExitCode": 0,
+          "decoderErrors": [],
+          "pcmFormat": "signed 16-bit little-endian",
+          "sampleRateHz": 48000,
+          "channels": 1
+        }
+      },
+      "derivative": {
+        "path": "/demo-audio/malerbetrieb.mp3",
+        "sha256": "1da5e20b0a4e7bf81b4c0e7018ad90ae7d6bbf6e6da032f3c8db7147fa7c2e96",
+        "bytes": 257088,
+        "mimeType": "audio/mpeg",
+        "container": "mp3",
+        "codec": "mp3",
+        "sampleRateHz": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "streamStartTimeSeconds": 0.023021,
+        "containerDurationSeconds": 32.112,
+        "decodedDurationSeconds": 32.0735,
+        "decodedSampleFrames": 1539528,
+        "decodeVerification": {
+          "complete": true,
+          "decoderExitCode": 0,
+          "decoderErrors": [],
+          "pcmFormat": "signed 16-bit little-endian",
+          "sampleRateHz": 48000,
+          "channels": 1
+        },
+        "derivedFromSha256": "72866c23dd00e8ef0c23560babc977d9522b58ad831cf56cf56392cdd5e5d6f8",
+        "transformation": {
+          "tool": "ffmpeg",
+          "version": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "input": "Original-Ogg dieser Asset-ID",
+          "settings": [
+            "-map",
+            "0:a:0",
+            "-map_metadata",
+            "-1",
+            "-ac",
+            "1",
+            "-ar",
+            "48000",
+            "-c:a",
+            "libmp3lame",
+            "-b:a",
+            "64k",
+            "-id3v2_version",
+            "0",
+            "-write_id3v1",
+            "0",
+            "-f",
+            "mp3"
+          ],
+          "purpose": "MP3-Wiedergabefallback; verlustbehaftetes Derivat, kein ASR-Eingang",
+          "metadataRemoved": true
+        }
+      }
+    },
+    {
+      "id": "eventplanung",
+      "label": "Eventplanung",
+      "provenance": {
+        "kind": "stored-user-demo-test",
+        "description": "Vom Nutzer bereitgestellte Originalaufnahme eines gespeicherten Demotests; Originalhash mit den gespeicherten Reportständen abgeglichen.",
+        "sourceFileName": "Eventplanung.ogg",
+        "sourceTestId": "0ba3703b-eb03-4397-a61a-2b4c55534b56",
+        "originalHashMatchesStoredReports": true,
+        "originalBytesPreserved": true,
+        "noNewProviderRequest": true
+      },
+      "original": {
+        "path": "/demo-audio/eventplanung.ogg",
+        "sha256": "e21c376b4d8bd5fde350f1dedf8dccd7d7fbb4b2dd937f253459c84426a4e3b5",
+        "bytes": 132113,
+        "mimeType": "audio/ogg",
+        "container": "ogg",
+        "codec": "opus",
+        "sampleRateHz": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "streamStartTimeSeconds": 0.0065,
+        "containerDurationSeconds": 53.2065,
+        "decodedDurationSeconds": 53.1935,
+        "decodedSampleFrames": 2553288,
+        "decodeVerification": {
+          "complete": true,
+          "decoderExitCode": 0,
+          "decoderErrors": [],
+          "pcmFormat": "signed 16-bit little-endian",
+          "sampleRateHz": 48000,
+          "channels": 1
+        }
+      },
+      "derivative": {
+        "path": "/demo-audio/eventplanung.mp3",
+        "sha256": "6d629fd66cfd0c7e3eb963c580bfa61af40c6c43f15c46bd8250a84f41b84dfe",
+        "bytes": 426048,
+        "mimeType": "audio/mpeg",
+        "container": "mp3",
+        "codec": "mp3",
+        "sampleRateHz": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "streamStartTimeSeconds": 0.023021,
+        "containerDurationSeconds": 53.232,
+        "decodedDurationSeconds": 53.1935,
+        "decodedSampleFrames": 2553288,
+        "decodeVerification": {
+          "complete": true,
+          "decoderExitCode": 0,
+          "decoderErrors": [],
+          "pcmFormat": "signed 16-bit little-endian",
+          "sampleRateHz": 48000,
+          "channels": 1
+        },
+        "derivedFromSha256": "e21c376b4d8bd5fde350f1dedf8dccd7d7fbb4b2dd937f253459c84426a4e3b5",
+        "transformation": {
+          "tool": "ffmpeg",
+          "version": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "input": "Original-Ogg dieser Asset-ID",
+          "settings": [
+            "-map",
+            "0:a:0",
+            "-map_metadata",
+            "-1",
+            "-ac",
+            "1",
+            "-ar",
+            "48000",
+            "-c:a",
+            "libmp3lame",
+            "-b:a",
+            "64k",
+            "-id3v2_version",
+            "0",
+            "-write_id3v1",
+            "0",
+            "-f",
+            "mp3"
+          ],
+          "purpose": "MP3-Wiedergabefallback; verlustbehaftetes Derivat, kein ASR-Eingang",
+          "metadataRemoved": true
+        }
+      }
+    },
+    {
+      "id": "event-floristik",
+      "label": "Event und Floristik",
+      "provenance": {
+        "kind": "stored-user-demo-test",
+        "description": "Vom Nutzer bereitgestellte Originalaufnahme eines gespeicherten Demotests; Originalhash mit den gespeicherten Reportständen abgeglichen.",
+        "sourceFileName": "Event_und_Floristik.ogg",
+        "sourceTestId": "a7b8bf95-3941-4710-8d35-0f52b1ebb98a",
+        "originalHashMatchesStoredReports": true,
+        "originalBytesPreserved": true,
+        "noNewProviderRequest": true
+      },
+      "original": {
+        "path": "/demo-audio/event-floristik.ogg",
+        "sha256": "5a1e877c052f693a8296f7c5f8d90d6704e10b78588e00c6d4ba1d478806a5dc",
+        "bytes": 192685,
+        "mimeType": "audio/ogg",
+        "container": "ogg",
+        "codec": "opus",
+        "sampleRateHz": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "streamStartTimeSeconds": 0.0065,
+        "containerDurationSeconds": 74.7865,
+        "decodedDurationSeconds": 74.7735,
+        "decodedSampleFrames": 3589128,
+        "decodeVerification": {
+          "complete": true,
+          "decoderExitCode": 0,
+          "decoderErrors": [],
+          "pcmFormat": "signed 16-bit little-endian",
+          "sampleRateHz": 48000,
+          "channels": 1
+        }
+      },
+      "derivative": {
+        "path": "/demo-audio/event-floristik.mp3",
+        "sha256": "230de24cee534f1f279ffb3133f20b69e18d73bbd04dc598c06a5fce0134ca5f",
+        "bytes": 598656,
+        "mimeType": "audio/mpeg",
+        "container": "mp3",
+        "codec": "mp3",
+        "sampleRateHz": 48000,
+        "channels": 1,
+        "channelLayout": "mono",
+        "streamStartTimeSeconds": 0.023021,
+        "containerDurationSeconds": 74.808,
+        "decodedDurationSeconds": 74.7735,
+        "decodedSampleFrames": 3589128,
+        "decodeVerification": {
+          "complete": true,
+          "decoderExitCode": 0,
+          "decoderErrors": [],
+          "pcmFormat": "signed 16-bit little-endian",
+          "sampleRateHz": 48000,
+          "channels": 1
+        },
+        "derivedFromSha256": "5a1e877c052f693a8296f7c5f8d90d6704e10b78588e00c6d4ba1d478806a5dc",
+        "transformation": {
+          "tool": "ffmpeg",
+          "version": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+          "input": "Original-Ogg dieser Asset-ID",
+          "settings": [
+            "-map",
+            "0:a:0",
+            "-map_metadata",
+            "-1",
+            "-ac",
+            "1",
+            "-ar",
+            "48000",
+            "-c:a",
+            "libmp3lame",
+            "-b:a",
+            "64k",
+            "-id3v2_version",
+            "0",
+            "-write_id3v1",
+            "0",
+            "-f",
+            "mp3"
+          ],
+          "purpose": "MP3-Wiedergabefallback; verlustbehaftetes Derivat, kein ASR-Eingang",
+          "metadataRemoved": true
+        }
+      }
+    }
+  ]
+}
