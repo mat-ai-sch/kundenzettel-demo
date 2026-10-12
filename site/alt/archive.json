@@ -1,0 +1,11 @@
+{
+  "sourceRepository": "mat-ai-sch/kundenzettel-website",
+  "sourceCommit": "326b0ebb52e59833ff23becd63cd248eb9fd8745",
+  "mode": "static-preview",
+  "adaptations": [
+    "Assets unter /alt/",
+    "Offline-Worker entfernt",
+    "Demo-Speicher getrennt"
+  ],
+  "note": "Übernommene alte GitLab-Oberfläche aus dem vorigen Demo-Pages-Workflow."
+}

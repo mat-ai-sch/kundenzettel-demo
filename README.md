@@ -17,3 +17,9 @@ Bei einem fehlenden Zertifikat für den www-Alias kann ein Administrator die Dom
 ## Wechsel von der bisherigen Offline-Demo
 
 Die frühere Demo konnte ihre alte Oberfläche aus einem bereits installierten Workbox-Cache anzeigen, obwohl auf dem Server neue Dateien lagen. `site/sw.js` löst diesen alten Offline-Worker ab. Für den sofortigen Wechsel gibt es https://demo.kundenzettel.de/_v/update.html; dieser Pfad umgeht den früheren Dokument-Cache, meldet nur die Root-Registrierung dieser Demo ab und öffnet den aktuellen Stand. Lokale Browserdaten werden nicht gelöscht. Der private Quellstand enthält einen Browser-Regressionstest für bereits besuchte und frische Profile auf Desktop und Mobil.
+
+## Archiv: alte GitLab-Oberfläche
+
+https://demo.kundenzettel.de/alt/ öffnet parallel die bisherige Oberfläche. Sie wurde aus dem übernommenen Website-Commit `326b0ebb52e59833ff23becd63cd248eb9fd8745` gebaut, auf den auch der vorherige Demo-Workflow zugriff. `site/alt/archive.json` dokumentiert diesen Ursprung. Der Build nutzt `VITE_PUBLIC_SURFACE=whatsapp`, `VITE_RUNTIME_MODE=preview` und den Asset-Basispfad `/alt/`. Nur Asset-Pfade, eigene Speicherkennungen und die Entfernung der Offline-Registrierung wurden für die parallele Vorschau angepasst; das alte Design bleibt erhalten. Die aktuelle Oberfläche an der Startadresse bleibt unverändert.
+
+Bei künftigen Veröffentlichungen `site/alt/` als unabhängiges Archiv erhalten und seine Dateien erneut in die Hashliste von `site/release.json` aufnehmen. Keine alten Root-Dateien oder Root-Service-Worker zurückspielen.

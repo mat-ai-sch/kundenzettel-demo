@@ -19,6 +19,214 @@
       "sha256": "06c5ea3405a12ec0ded6371abb6c18bb3324782154325bc804c648ddf18379cb"
     },
     {
+      "path": "alt/archive.json",
+      "sha256": "47ac8ae05a7775f8b01a2ceed53307e84c0d4bebc6bd78eae1b3ff8188439bbf"
+    },
+    {
+      "path": "alt/assets/App-CDZJkH4q.js",
+      "sha256": "0934a5fa9ed472c07e57beee8a13c9a46fc869f15a4690fcff486332598732a8"
+    },
+    {
+      "path": "alt/assets/LandingPage-Cet6K5WU.css",
+      "sha256": "eb351ec7a8cef8afd049e6b37628f329d14332fd0227800bf2bc129e9299484b"
+    },
+    {
+      "path": "alt/assets/LandingPage-gIoX3fQv.js",
+      "sha256": "88072f1caee967c8f6c8fb44d7ced18714ec6d3a2ed125555d013500038ad8c3"
+    },
+    {
+      "path": "alt/assets/OrderFields-BrPzO4F0.js",
+      "sha256": "14abc95a3004a5f3901961ebabff8baa6e715450dfe139e79517d470c8fe67ee"
+    },
+    {
+      "path": "alt/assets/OrderFields-CexEbDj0.css",
+      "sha256": "6e00b724f06e3a6ca6bc79c6125a082200cee2abd170048101e98eb7aca29737"
+    },
+    {
+      "path": "alt/assets/html2canvas-C7Y0UpX3.js",
+      "sha256": "cf898d58e8e950ad76af24beec34d6a8f73752906d5c4c3cdf2d7da544288077"
+    },
+    {
+      "path": "alt/assets/index-BuPG1b74.css",
+      "sha256": "cc81f26c1fd97340b2c35e99a41b37d5a176219353cfda4cddf2487bbb964f2f"
+    },
+    {
+      "path": "alt/assets/index-dXUNMW5k.js",
+      "sha256": "310bbdfb9a80594eb69f029f19dbaa16da1a8ca76147d6eebaf71876a6fa1001"
+    },
+    {
+      "path": "alt/assets/index.es-DmUveX-0.js",
+      "sha256": "9eceee524a32173b890914f08f529f32b26bf3a4970a006dea58465d8cea1b2c"
+    },
+    {
+      "path": "alt/assets/purify-CvY0ZG6U.js",
+      "sha256": "5434c9280514428b991c0b685365d5c8abe669802e94fa50886f4e6091715ed9"
+    },
+    {
+      "path": "alt/assets/rolldown-runtime-hePW80VL.js",
+      "sha256": "580ad8c58061a4dde99bde0a56905e382f0568516ee2f5b84dbfb52085709021"
+    },
+    {
+      "path": "alt/brand/apple-touch-icon.png",
+      "sha256": "c73c64dcc43bb8ff23760c9f486a930cf56e84f71e605c4ed5ebe04655aa7b16"
+    },
+    {
+      "path": "alt/brand/briefkopf.jpg",
+      "sha256": "29a69632f91e17e669e6b6899ef62d55198fe1be3bb3b8d79bc04a3518ac2d0e"
+    },
+    {
+      "path": "alt/brand/briefkopf.png",
+      "sha256": "e72a442320e1a0831af0369f5ff2e565bbc3069a71f03f09a6723f6ef5bfdabc"
+    },
+    {
+      "path": "alt/brand/favicon-32.png",
+      "sha256": "90cb7351cb71938a3376bff2f39608df90b0688c49a7bdef55024feb93eb85ff"
+    },
+    {
+      "path": "alt/brand/favicon-48.png",
+      "sha256": "2df8a31ad2640883803f7c1a5077e4cb1e497479f3d7450ec801daa3bfb6a5f2"
+    },
+    {
+      "path": "alt/brand/kundenzettel-logo-clear.png",
+      "sha256": "a1f14d464208fe9f69e3d07307758a63c382d0c6102e6e1049037934721cd4a2"
+    },
+    {
+      "path": "alt/brand/kundenzettel-logo.png",
+      "sha256": "9b989529645797c157127bf75cba3e9f80941d67253bd5ce3295e9b37f3ebcf3"
+    },
+    {
+      "path": "alt/brand/kundenzettel-mark.png",
+      "sha256": "5ae741fdbb8e286239e3089acc84ca9811a48ce859584f51dd4a614c80bda5be"
+    },
+    {
+      "path": "alt/brand/logo-square.png",
+      "sha256": "7ced6f8eb821cdf414d574f5e05a844e89ef7da76a8c7bff149362ef1ddb0cdb"
+    },
+    {
+      "path": "alt/brand/logo.png",
+      "sha256": "262974fbb61bdbc98eee165253e2a493fa9ff25fcf5ac48f9efde7dbe6929ac9"
+    },
+    {
+      "path": "alt/brand/logo.svg",
+      "sha256": "778f0f22a21b11392b96fdae8704bed99e8efd4211af42790adcfddad21a9fc6"
+    },
+    {
+      "path": "alt/brand/pwa-192.png",
+      "sha256": "a6fba9a76b1e85ec8ec8e5e319a5c4e616b842aa9bd01106326ed46ebfc9355a"
+    },
+    {
+      "path": "alt/brand/pwa-512.png",
+      "sha256": "b4d3d5b8feb6229d92c9b68290396154f3b08913fce865287721d5b22f225d16"
+    },
+    {
+      "path": "alt/brand/pwa-maskable-512.png",
+      "sha256": "1e36d2e0bd8d1e7b053ee7a0a2a3565b8c87544dd207445b51d12a15cab2f073"
+    },
+    {
+      "path": "alt/favicon.svg",
+      "sha256": "61bc9a161de58248288e6905425d7180f0624c2865007b97d763fdac12043a66"
+    },
+    {
+      "path": "alt/icons.svg",
+      "sha256": "b45fa506195cfcdef406ba9f0c77b36ddc1a7c224040926ec70abc2fdea7b93a"
+    },
+    {
+      "path": "alt/index.html",
+      "sha256": "0e63b7d50a02541c2f6f9a1232d2fd1df7490d38f589c8cd10ee041c425f04b0"
+    },
+    {
+      "path": "alt/media/Angebot_Traumtaenzer_Berger.pdf",
+      "sha256": "2b25bc359459a8162144e6524d1134126f34c90cc88458c48d02be8f2bd6d881"
+    },
+    {
+      "path": "alt/media/demo/WhatsApp-Referenzvideo_1-poster.jpg",
+      "sha256": "3dab8160513eda302a4dba4492501931289fa84ef1f4b4f5496b7060c8551b92"
+    },
+    {
+      "path": "alt/media/demo/WhatsApp-Referenzvideo_1.mp4",
+      "sha256": "176a6efc60bdf8af8bf4679d8a6733296da02b3672c6dc4548b22ac6fa78745f"
+    },
+    {
+      "path": "alt/media/demo/WhatsApp-Referenzvideo_2-poster.jpg",
+      "sha256": "4a26ba1bceb157f238a2aae3b90a7104491d98051e0de405511e8e83a8602ac7"
+    },
+    {
+      "path": "alt/media/demo/WhatsApp-Referenzvideo_2.mp4",
+      "sha256": "e22ee4f507ce38622dcfef98b2dd3af5ba2a4245da37d7b5de1fb7b46a11357d"
+    },
+    {
+      "path": "alt/media/demo/WhatsApp_Sprachnachricht.mp3",
+      "sha256": "1250eb983c2d5046985eec10c141d9c2acad333ad63ce611149e869bc15ff13a"
+    },
+    {
+      "path": "alt/media/demo/anna-blickfang-hand.jpg",
+      "sha256": "d1b210abcdc06ea89da141269a7bb6ab1746f378c7906f7babc6783ea9db48e8"
+    },
+    {
+      "path": "alt/media/demo/anna-blickfang-hand.mp4",
+      "sha256": "493a1fdc63f7c295580a69a7a6acd51ec97d0213c1966e541a9cb224a0f40da1"
+    },
+    {
+      "path": "alt/media/demo/anna-blickfang-table.jpg",
+      "sha256": "0177f06b03d7639d49aa59e72bb449c514b096727763ba3155cbdc8e6ac3d9d7"
+    },
+    {
+      "path": "alt/media/demo/anna-blickfang-table.mp4",
+      "sha256": "a9c785e73af6c1e4b5b018bd153f22227474e4d28e021948d1e980d3b55b6895"
+    },
+    {
+      "path": "alt/media/referenz-kranz.mp4",
+      "sha256": "ac90637dcfec4315da72f5cb9d3ea89b1ecf6e0fd7ebb965f61966b7aa31d2e4"
+    },
+    {
+      "path": "alt/media/voice-laura.wav",
+      "sha256": "9e25be18700110a9b8d9cf4974096f451ce984e29bfee483b9f277a3fa682378"
+    },
+    {
+      "path": "alt/media/voice-sophie.wav",
+      "sha256": "4b677a7c0aae61992f77e8617b8a7f7f86fb1e32d95a06d3cadad8e793ac5b66"
+    },
+    {
+      "path": "alt/products/augenweide.jpg",
+      "sha256": "05656b13d2390fcd3d98bef06396c8b63bd35b0000b68f842daedbfac64061ad"
+    },
+    {
+      "path": "alt/products/blickfang-card.jpg",
+      "sha256": "cddeb5a7a66fc9e8c3b9123a4e7d11d0ab9a0d089b1c28081fdfdffbf8348e13"
+    },
+    {
+      "path": "alt/products/blickfang.jpg",
+      "sha256": "cac1a03bc8a3bad59d5bdb76094f51d18c7e47b901f4e537cd59f3a0901826eb"
+    },
+    {
+      "path": "alt/products/glueckskind.jpg",
+      "sha256": "4877de2b5d737bec8b2c9d32a7eb31d478e6957a8dcb21e8338eef9dca46a6a7"
+    },
+    {
+      "path": "alt/products/hero-brand.jpg",
+      "sha256": "7b07024411d053e94b1d712be5cafa9aa01c181e2e02f55904054dfeefd04db5"
+    },
+    {
+      "path": "alt/products/kombi-set.jpg",
+      "sha256": "142fa76df76052a3d19b1d8289a4517e005fa328dcbdfe1ffab4030f753270ea"
+    },
+    {
+      "path": "alt/products/leises-fluestern.jpg",
+      "sha256": "d007b6a99b029fdac58f583bb9cf1685f3747736963ef1c559c40607fd3c8078"
+    },
+    {
+      "path": "alt/products/traumtaenzer.jpg",
+      "sha256": "6192784a56d50b19139f6158fdb1d7e81d99a2ea8bb31c037d9a3b2c8478c731"
+    },
+    {
+      "path": "alt/products/wunderfein.jpg",
+      "sha256": "f0832c28555c40b0952382ce3d09387508d12c8f761992aead88b3b8a34744f7"
+    },
+    {
+      "path": "alt/products/zarte-umarmung.jpg",
+      "sha256": "b363636a53a6c16bbb2905d9a5a7443e61a93e673d949021d94fd97a1f8a946d"
+    },
+    {
       "path": "assets/index-5LeP8odv.js",
       "sha256": "b2dc7793efe139a155a4f4065baa548f6c45b4b0d0b089223c5af7544b050a2f"
     },
@@ -102,5 +310,9 @@
       "path": "sw.js",
       "sha256": "b9537e48e819657fd38f5c11bc3b7a0e706f85bf3ea5dae22f02f5373f5a2c52"
     }
-  ]
+  ],
+  "legacyPreview": {
+    "path": "/alt/",
+    "sourceCommit": "326b0ebb52e59833ff23becd63cd248eb9fd8745"
+  }
 }
