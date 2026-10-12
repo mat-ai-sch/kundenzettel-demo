@@ -23,3 +23,7 @@ Die frühere Demo konnte ihre alte Oberfläche aus einem bereits installierten W
 https://demo.kundenzettel.de/alt/ öffnet parallel die bisherige Oberfläche. Sie wurde aus dem übernommenen Website-Commit `326b0ebb52e59833ff23becd63cd248eb9fd8745` gebaut, auf den auch der vorherige Demo-Workflow zugriff. `site/alt/archive.json` dokumentiert diesen Ursprung. Der Build nutzt `VITE_PUBLIC_SURFACE=whatsapp`, `VITE_RUNTIME_MODE=preview` und den Asset-Basispfad `/alt/`. Nur Asset-Pfade, eigene Speicherkennungen und die Entfernung der Offline-Registrierung wurden für die parallele Vorschau angepasst; das alte Design bleibt erhalten. Die aktuelle Oberfläche an der Startadresse bleibt unverändert.
 
 Bei künftigen Veröffentlichungen `site/alt/` als unabhängiges Archiv erhalten und seine Dateien erneut in die Hashliste von `site/release.json` aufnehmen. Keine alten Root-Dateien oder Root-Service-Worker zurückspielen.
+
+## Informationen: Q&A-Board
+
+Der aktuelle Stand enthält unter `#/informationen` zwölf redaktionell geprüfte Fragen, Beispielfragen und ein Fragefeld, das vorhandene Antworten im Browser findet. Geplante Module stehen getrennt darunter. Fragen werden weder gespeichert noch an externe Anbieter gesendet. Desktop nutzt zwei unabhängige Scrollflächen; Mobil eine gemeinsame Lesefläche. Die Desktop-Zeile „Dein Arbeitsplatz“ entfällt, die mobile Kopfzeile bleibt erhalten.
