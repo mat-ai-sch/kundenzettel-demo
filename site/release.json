@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-12T10:01:31.367389+00:00",
-  "sourceCommit": "5958cb46fc0bfb00dff531a20c6f89f1334c9efa",
+  "createdAt": "2026-10-12T10:32:27.704765+00:00",
+  "sourceCommit": "da02059d42f3c5992f9840fbcc1d6589500cf766",
   "sourceBranch": "feat/kundenzettel-ui-kit-demo",
   "mode": "static-preview",
   "hostname": "demo.kundenzettel.de",
@@ -227,12 +227,12 @@
       "sha256": "b363636a53a6c16bbb2905d9a5a7443e61a93e673d949021d94fd97a1f8a946d"
     },
     {
-      "path": "assets/index-ClD2lXCT.css",
-      "sha256": "e787b84723ec95cdb182c555ba239302f2aea48ab0d4883351db3b044ae08bab"
+      "path": "assets/index-DFJVR8IH.js",
+      "sha256": "243529f4e985895ffeab2cffce12074d0706dc7b733d05c326936f4f6bfbd58c"
     },
     {
-      "path": "assets/index-SmMZLf0H.js",
-      "sha256": "9d77f04d884f5031980008c1751f96d3a1f02845b562f488dc8d8f886f61cda2"
+      "path": "assets/index-Di7LjU-t.css",
+      "sha256": "05299f7f3568906a4863c90cc68deb95641597561db7f1fb992ad7e27d6e42a6"
     },
     {
       "path": "assets/inter-latin-400-normal-C38fXH4l.woff2",
@@ -292,7 +292,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "5905a2283658517aea0696be8f427cc4c76a063ce09bbdf912d9913b393996f3"
+      "sha256": "72fff612a9d9cb8a6fa059bfb36fb7f0e8932318a5882f61a20beb37a614d6f8"
     },
     {
       "path": "licenses/Coolicons-NOTICE.md",
