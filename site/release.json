@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-12T04:11:49.468824+00:00",
-  "sourceCommit": "0c1d99c108081b401fac2415cf5dd517a58948fe",
+  "createdAt": "2026-10-12T04:28:44.507474+00:00",
+  "sourceCommit": "3b73a7076e6c83e2b1382965de2b3da55981130e",
   "sourceBranch": "feat/kundenzettel-ui-kit-demo",
   "mode": "static-preview",
   "hostname": "demo.kundenzettel.de",
@@ -36,7 +36,7 @@
     },
     {
       "path": "datenschutz/index.html",
-      "sha256": "27b84b0c24e2e9cd3b43023b388c5822b178424e62c6cc3acc019f3620147e0b"
+      "sha256": "741bf9b2291e63bead0ba3e8c4dc10de88b5c522cf02515674f115aa6b4af15b"
     },
     {
       "path": "demo-audio/event-floristik.mp3",

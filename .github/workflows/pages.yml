@@ -60,6 +60,28 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: HTTPS-Status der beiden Adressen festhalten
+        env:
+          EXPECTED_SOURCE_COMMIT: ${{ needs.build.outputs.source_commit }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+          for host in ['demo.kundenzettel.de', 'www.demo.kundenzettel.de']:
+              try:
+                  with urllib.request.urlopen(f'https://{host}/release.json?verify=' + os.environ['EXPECTED_SOURCE_COMMIT'], timeout=15) as response:
+                      release = json.load(response)
+                      assert release['sourceCommit'] == os.environ['EXPECTED_SOURCE_COMMIT']
+                  print(f'::notice title=HTTPS-Status::{host}: TLS und veröffentlichter Quellstand bestätigt')
+              except Exception as error:
+                  message = f'{host}: {type(error).__name__}: {error}'.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+                  print('::warning title=HTTPS-Status::' + message)
+          PY
+      - name: Kanonische Pages-Domain erneut prüfen lassen
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f cname=demo.kundenzettel.de -F https_enforced=true
       - name: Beide HTTPS-Adressen live prüfen
         env:
           EXPECTED_SOURCE_COMMIT: ${{ needs.build.outputs.source_commit }}
@@ -82,6 +104,8 @@ jobs:
                   break
               except Exception as error:
                   if attempt == 59:
+                      message = str(error).replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+                      print('::error title=Live-HTTPS::' + message)
                       raise
                   print('DNS, Zertifikat oder Pages-Veröffentlichung noch nicht bereit:', type(error).__name__)
                   time.sleep(10)
