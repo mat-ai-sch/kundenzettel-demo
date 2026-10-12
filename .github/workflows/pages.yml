@@ -100,6 +100,8 @@ jobs:
           assert (root / 'index.html').is_file()
           assert (root / 'impressum/index.html').is_file()
           assert (root / 'datenschutz/index.html').is_file()
+          assert (root / 'sw.js').is_file(), 'Ablösung des früheren Demo-Offline-Workers fehlt'
+          assert (root / '_v/update.html').is_file(), 'Direkter Aktualisierungsweg fehlt'
           assert (root / 'CNAME').read_text().strip() == 'demo.kundenzettel.de'
           for item in release['files']:
               path = (root / item['path']).resolve()
@@ -109,6 +111,7 @@ jobs:
               output.write('source_commit=' + release['sourceCommit'] + '\n')
           print('Geprüfter Quellstand:', release['sourceCommit'])
           PY
+          node --check site/sw.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -133,7 +136,7 @@ jobs:
           EXPECTED_SOURCE_COMMIT: ${{ needs.build.outputs.source_commit }}
         run: |
           python3 - <<'PY'
-          import json, os, urllib.request
+          import hashlib, json, os, urllib.request
           for host in ['demo.kundenzettel.de', 'www.demo.kundenzettel.de']:
               try:
                   with urllib.request.urlopen(f'https://{host}/release.json?verify=' + os.environ['EXPECTED_SOURCE_COMMIT'], timeout=15) as response:
@@ -143,13 +146,26 @@ jobs:
               except Exception as error:
                   message = f'{host}: {type(error).__name__}: {error}'.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
                   print('::warning title=HTTPS-Status::' + message)
+          try:
+              base = 'https://demo.kundenzettel.de/'
+              with urllib.request.urlopen(base + 'release.json?verify=' + os.environ['EXPECTED_SOURCE_COMMIT'], timeout=15) as response:
+                  release = json.load(response)
+              hashes = {item['path']: item['sha256'] for item in release['files']}
+              for path, content_type in [('sw.js', 'javascript'), ('_v/update.html', 'text/html')]:
+                  with urllib.request.urlopen(base + path + '?verify=' + os.environ['EXPECTED_SOURCE_COMMIT'], timeout=15) as response:
+                      assert content_type in response.headers.get('Content-Type', '').lower()
+                      assert hashlib.sha256(response.read()).hexdigest() == hashes[path]
+              print('::notice title=Demo-Aktualisierung::Ablöse-Worker und direkter Aktualisierungseinstieg werden mit den geprüften Dateihashes ausgeliefert')
+          except Exception as error:
+              message = str(error).replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+              print('::warning title=Demo-Aktualisierung::' + message)
           PY
       - name: Beide HTTPS-Adressen live prüfen
         env:
           EXPECTED_SOURCE_COMMIT: ${{ needs.build.outputs.source_commit }}
         run: |
           python3 - <<'PY'
-          import json, os, time, urllib.request, urllib.parse
+          import hashlib, json, os, time, urllib.request, urllib.parse
           expected = os.environ['EXPECTED_SOURCE_COMMIT']
           deadline = time.monotonic() + 600
           for attempt in range(60):
@@ -166,6 +182,12 @@ jobs:
                           assert urllib.parse.parse_qs(target.query).get('verify') == [expected]
                       assert release['sourceCommit'] == expected
                       assert release['mode'] == 'static-preview'
+                  hashes = {item['path']: item['sha256'] for item in release['files']}
+                  for path, content_type in [('sw.js', 'javascript'), ('_v/update.html', 'text/html')]:
+                      request = urllib.request.Request('https://demo.kundenzettel.de/' + path + '?verify=' + expected, headers={'Cache-Control': 'no-cache'})
+                      with urllib.request.urlopen(request, timeout=15) as response:
+                          assert content_type in response.headers.get('Content-Type', '').lower()
+                          assert hashlib.sha256(response.read()).hexdigest() == hashes[path]
                   print('Beide HTTPS-Adressen liefern den geprüften Demo-Quellstand:', expected)
                   break
               except Exception as error:

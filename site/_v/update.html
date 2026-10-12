@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kundenzettel · Demo aktualisieren</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { margin: 2rem; font: 1rem/1.5 system-ui, sans-serif; background: Canvas; color: CanvasText; }
+    a { display: inline-flex; align-items: center; min-height: 44px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Demo aktualisieren</h1>
+    <p id="status" role="status">Die aktuelle Kundenzettel-Demo wird geöffnet …</p>
+    <a href="/?_kz_migrated=20261012">Demo öffnen</a>
+  </main>
+  <script>
+    (async () => {
+      if ('serviceWorker' in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        const rootScope = new URL('/', location.origin).href;
+        await Promise.all(registrations.filter(registration => registration.scope === rootScope)
+          .map(registration => registration.unregister()));
+      }
+      const target = new URL('/', location.origin);
+      target.searchParams.set('_kz_migrated', '20261012');
+      target.hash = location.hash;
+      location.replace(target.href);
+    })().catch(() => {
+      document.getElementById('status').textContent = 'Die Aktualisierung konnte nicht abgeschlossen werden. Öffne die Demo bitte in einem neuen privaten Browserfenster.';
+    });
+  </script>
+</body>
+</html>

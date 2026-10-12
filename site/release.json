@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-12T05:27:16.951274+00:00",
-  "sourceCommit": "c00794b52cc5a8938f903c9192a857bc77fec2b3",
+  "createdAt": "2026-10-12T06:18:26.476579+00:00",
+  "sourceCommit": "06079a50a0a5b93b271fc97fcb23934c47741ad2",
   "sourceBranch": "feat/kundenzettel-ui-kit-demo",
   "mode": "static-preview",
   "hostname": "demo.kundenzettel.de",
@@ -15,12 +15,16 @@
       "sha256": "a7979d2fedcaefc0d887d4f9de37ff3fe5151aae6ad702bced5e619a36342804"
     },
     {
-      "path": "assets/index-Bm35vHEc.css",
-      "sha256": "6810e7093d4c8f9758be18f74740ff3d34c0344ea2946a3413cbb2dcc6345684"
+      "path": "_v/update.html",
+      "sha256": "06c5ea3405a12ec0ded6371abb6c18bb3324782154325bc804c648ddf18379cb"
     },
     {
-      "path": "assets/index-cAUVSD_z.js",
-      "sha256": "7de1d24230715df2cd41da39f7d9334850deac3c106b2d163b72e0366b5c9d5d"
+      "path": "assets/index-5LeP8odv.js",
+      "sha256": "b2dc7793efe139a155a4f4065baa548f6c45b4b0d0b089223c5af7544b050a2f"
+    },
+    {
+      "path": "assets/index-Bm35vHEc.css",
+      "sha256": "6810e7093d4c8f9758be18f74740ff3d34c0344ea2946a3413cbb2dcc6345684"
     },
     {
       "path": "assets/inter-latin-400-normal-C38fXH4l.woff2",
@@ -80,7 +84,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "207dd3af68073b54658cb48c03ea5f164598e482fdad836a00d1863594915ebc"
+      "sha256": "11d5f770764302552a74d22e4df2c4d9ed2fcaa79657b3ec6c4e3cc5696a9acf"
     },
     {
       "path": "licenses/Coolicons-NOTICE.md",
@@ -93,6 +97,10 @@
     {
       "path": "rechtliches.css",
       "sha256": "48670d953b8edf5fcab074940d2da0e1844da3a7e96786eee8a747dcd0b73b20"
+    },
+    {
+      "path": "sw.js",
+      "sha256": "b9537e48e819657fd38f5c11bc3b7a0e706f85bf3ea5dae22f02f5373f5a2c52"
     }
   ]
 }
