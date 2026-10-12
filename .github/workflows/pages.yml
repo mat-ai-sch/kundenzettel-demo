@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      renew_certificate:
+        description: "Die Demo-Domain einmalig entfernen und sofort wieder setzen, um ihr Zertifikat neu anzufordern"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -13,6 +18,66 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  certificate:
+    needs: build
+    if: github.event_name == 'workflow_dispatch' && inputs.renew_certificate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pages: write
+    steps:
+      - name: Demo-Zertifikat einmalig neu anfordern
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json, os, time, urllib.error, urllib.request
+          assert os.environ['GITHUB_REPOSITORY'] == 'mat-ai-sch/kundenzettel-demo'
+          endpoint = 'https://api.github.com/repos/' + os.environ['GITHUB_REPOSITORY'] + '/pages'
+          hostname = 'demo.kundenzettel.de'
+          def api(method='GET', body=None):
+              request = urllib.request.Request(endpoint, method=method,
+                  data=None if body is None else json.dumps(body).encode(),
+                  headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                           'Accept': 'application/vnd.github+json',
+                           'Content-Type': 'application/json',
+                           'X-GitHub-Api-Version': '2022-11-28'})
+              try:
+                  with urllib.request.urlopen(request, timeout=20) as response:
+                      payload = response.read()
+                      return json.loads(payload) if payload else None
+              except urllib.error.HTTPError as error:
+                  try:
+                      detail = json.loads(error.read()).get('message', 'GitHub-API-Anfrage abgelehnt')
+                  except Exception:
+                      detail = 'GitHub-API-Anfrage abgelehnt'
+                  message = f'{method} Pages: HTTP {error.code}: {detail}'
+                  print('::error title=Pages-Domainkonfiguration::' + message.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A'))
+                  raise
+          current = api()
+          assert current['cname'] == hostname, 'Unerwartete Domain; keine Änderung vorgenommen'
+          assert current['build_type'] == 'workflow', 'Unerwartete Pages-Buildquelle'
+          try:
+              api('PUT', {'cname': None})
+          finally:
+              # Auch bei einem unklaren Netzwerkfehler sofort dieselbe Domain wiederherstellen.
+              for attempt in range(5):
+                  try:
+                      api('PUT', {'cname': hostname})
+                      break
+                  except Exception:
+                      if attempt == 4:
+                          raise
+                      time.sleep(5)
+          restored = api()
+          assert restored['cname'] == hostname
+          assert restored['build_type'] == current['build_type']
+          certificate = restored.get('https_certificate') or {}
+          status = json.dumps({'cname': restored['cname'], 'https_enforced': restored.get('https_enforced'),
+                               'certificate': certificate}, ensure_ascii=False)
+          print('::notice title=Pages-Zertifikatsanforderung::' + status.replace('%', '%25').replace('\n', '%0A'))
+          PY
+
   build:
     runs-on: ubuntu-latest
     outputs:
@@ -48,7 +113,8 @@ jobs:
           path: site
 
   deploy:
-    needs: build
+    needs: [build, certificate]
+    if: always() && needs.build.result == 'success' && (needs.certificate.result == 'success' || needs.certificate.result == 'skipped')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment:
@@ -76,19 +142,15 @@ jobs:
                   message = f'{host}: {type(error).__name__}: {error}'.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
                   print('::warning title=HTTPS-Status::' + message)
           PY
-      - name: Kanonische Pages-Domain erneut prüfen lassen
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f cname=demo.kundenzettel.de -F https_enforced=true
       - name: Beide HTTPS-Adressen live prüfen
         env:
           EXPECTED_SOURCE_COMMIT: ${{ needs.build.outputs.source_commit }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           python3 - <<'PY'
           import json, os, time, urllib.request, urllib.parse
           expected = os.environ['EXPECTED_SOURCE_COMMIT']
+          deadline = time.monotonic() + 600
           for attempt in range(60):
               try:
                   for host in ['demo.kundenzettel.de', 'www.demo.kundenzettel.de']:
@@ -97,16 +159,20 @@ jobs:
                       with urllib.request.urlopen(request, timeout=15) as response:
                           release = json.load(response)
                           assert response.status == 200
-                          assert urllib.parse.urlsplit(response.url).hostname == 'demo.kundenzettel.de'
+                          target = urllib.parse.urlsplit(response.url)
+                          assert target.hostname == 'demo.kundenzettel.de'
+                          assert target.path == '/release.json'
+                          assert urllib.parse.parse_qs(target.query).get('verify') == [expected]
                       assert release['sourceCommit'] == expected
                       assert release['mode'] == 'static-preview'
                   print('Beide HTTPS-Adressen liefern den geprüften Demo-Quellstand:', expected)
                   break
               except Exception as error:
-                  if attempt == 59:
+                  if attempt == 59 or time.monotonic() >= deadline:
                       message = str(error).replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
                       print('::error title=Live-HTTPS::' + message)
                       raise
                   print('DNS, Zertifikat oder Pages-Veröffentlichung noch nicht bereit:', type(error).__name__)
                   time.sleep(10)
           PY
+          gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -F https_enforced=true

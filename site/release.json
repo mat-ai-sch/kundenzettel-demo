@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-12T04:28:44.507474+00:00",
-  "sourceCommit": "3b73a7076e6c83e2b1382965de2b3da55981130e",
+  "createdAt": "2026-10-12T05:22:24.235381+00:00",
+  "sourceCommit": "24f93d1c50bc85f25e94d24d0b90a36c4008ad91",
   "sourceBranch": "feat/kundenzettel-ui-kit-demo",
   "mode": "static-preview",
   "hostname": "demo.kundenzettel.de",
