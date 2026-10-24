@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "createdAt": "2026-10-23T13:32:31.068248+00:00",
-  "sourceCommit": "d4119a05116d50124de12ac29faf3215f20606bc",
+  "createdAt": "2026-10-24T13:10:31.676279+00:00",
+  "sourceCommit": "1400839fa20c7f2f539ae7fba2f0ea8423254733",
   "sourceBranch": "feat/kundenzettel-ui-kit-demo",
   "mode": "static-preview",
   "hostname": "demo.kundenzettel.de",
@@ -19,24 +19,24 @@
       "sha256": "929c397c7eb1c516836ea18680e690614c2a4015cb12d1e838efa202b3cfcc44"
     },
     {
-      "path": "assets/coex-preview-DQDBhAlL.js",
-      "sha256": "8528728025701753bf4630a8585c5554d568cef6512bdfa4d9f5a901448d1037"
+      "path": "assets/coex-preview-TTeIZcS0.js",
+      "sha256": "ac7001a4195402e19d58d77e04723d0a9ec6cbab2fe96e07d9651a5192c7694a"
     },
     {
-      "path": "assets/index-1qxYBXHu.js",
-      "sha256": "f82f0f2a66e604730b4ccd345aa4d9448f2a3a1ec3f7eb5617a5534cf5d982f8"
+      "path": "assets/index-0KjWwP7H.css",
+      "sha256": "cdb2d6b59bbbb9c542d9b3634767fd83499173e8b44ceed52e8e2c247d1a2b8c"
     },
     {
-      "path": "assets/index-BbfLfKll.css",
-      "sha256": "d94478f0636e05776facb78e9d365f9c10c5d5f9bb2b7e24f47716fc25896a90"
+      "path": "assets/index-CAUTVGNk.js",
+      "sha256": "d334d8e1db24d3dfcaf5ebd23de3a375bf3fbc3c214417efa90933d6fb7b60ad"
     },
     {
-      "path": "assets/index-CD3GaUU8.js",
+      "path": "assets/index-CBCbxEj9.css",
+      "sha256": "a515351fe6cae3d43e862872dd3997e83173700021b68b6dff1279427ba8b2a2"
+    },
+    {
+      "path": "assets/index-D0blxXfO.js",
       "sha256": "6ec03b6c7254d377e89702504b20101b757e32a601c862c11b92900cb6fbde4f"
-    },
-    {
-      "path": "assets/index-D9HFbSi4.css",
-      "sha256": "6626966c62681ca5398002a68090ab4304ecbb291000065e45804e1d4fae672a"
     },
     {
       "path": "assets/inter-latin-400-normal-C38fXH4l.woff2",
@@ -56,7 +56,7 @@
     },
     {
       "path": "coex-preview.html",
-      "sha256": "e73124932bb856adbc934deaa7d32dd24678a1a6e8e6f8f23276a34b35f516fb"
+      "sha256": "790e85379199b489b8f361a2e20705958905f1bb45080bccc8469350af6812e4"
     },
     {
       "path": "datenschutz/index.html",
@@ -104,7 +104,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "f1de0ed0c1aa527cc6a5229b60ec51fac931111327f4ab3982ccfb27e4d75553"
+      "sha256": "09556c21dae3ebafb06e5f5b83d1b51ed04f18a3426f1b7e5f61b6680d35a8ac"
     },
     {
       "path": "licenses/Coolicons-NOTICE.md",
