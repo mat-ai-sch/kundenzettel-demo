@@ -4,11 +4,6 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-    inputs:
-      renew_certificate:
-        description: "Demo-Zertifikat einmalig neu anfordern (benötigt Repository-Secret PAGES_ADMIN_TOKEN)"
-        type: boolean
-        default: false
 
 permissions:
   contents: read
@@ -18,68 +13,6 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  certificate:
-    needs: build
-    if: github.event_name == 'workflow_dispatch' && inputs.renew_certificate
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      pages: write
-    steps:
-      - name: Demo-Zertifikat einmalig neu anfordern
-        env:
-          GH_TOKEN: ${{ secrets.PAGES_ADMIN_TOKEN }}
-        run: |
-          python3 - <<'PY'
-          import json, os, time, urllib.error, urllib.request
-          if not os.environ.get('GH_TOKEN'):
-              raise SystemExit('::error title=Pages-Berechtigung::Repository-Secret PAGES_ADMIN_TOKEN mit Pages:write und Administration:write erforderlich; keine Domainänderung vorgenommen')
-          assert os.environ['GITHUB_REPOSITORY'] == 'mat-ai-sch/kundenzettel-demo'
-          endpoint = 'https://api.github.com/repos/' + os.environ['GITHUB_REPOSITORY'] + '/pages'
-          hostname = 'demo.kundenzettel.de'
-          def api(method='GET', body=None):
-              request = urllib.request.Request(endpoint, method=method,
-                  data=None if body is None else json.dumps(body).encode(),
-                  headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
-                           'Accept': 'application/vnd.github+json',
-                           'Content-Type': 'application/json',
-                           'X-GitHub-Api-Version': '2022-11-28'})
-              try:
-                  with urllib.request.urlopen(request, timeout=20) as response:
-                      payload = response.read()
-                      return json.loads(payload) if payload else None
-              except urllib.error.HTTPError as error:
-                  try:
-                      detail = json.loads(error.read()).get('message', 'GitHub-API-Anfrage abgelehnt')
-                  except Exception:
-                      detail = 'GitHub-API-Anfrage abgelehnt'
-                  message = f'{method} Pages: HTTP {error.code}: {detail}'
-                  print('::error title=Pages-Domainkonfiguration::' + message.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A'))
-                  raise
-          current = api()
-          assert current['cname'] == hostname, 'Unerwartete Domain; keine Änderung vorgenommen'
-          assert current['build_type'] == 'workflow', 'Unerwartete Pages-Buildquelle'
-          try:
-              api('PUT', {'cname': None})
-          finally:
-              # Auch bei einem unklaren Netzwerkfehler sofort dieselbe Domain wiederherstellen.
-              for attempt in range(5):
-                  try:
-                      api('PUT', {'cname': hostname})
-                      break
-                  except Exception:
-                      if attempt == 4:
-                          raise
-                      time.sleep(5)
-          restored = api()
-          assert restored['cname'] == hostname
-          assert restored['build_type'] == current['build_type']
-          certificate = restored.get('https_certificate') or {}
-          status = json.dumps({'cname': restored['cname'], 'https_enforced': restored.get('https_enforced'),
-                               'certificate': certificate}, ensure_ascii=False)
-          print('::notice title=Pages-Zertifikatsanforderung::' + status.replace('%', '%25').replace('\n', '%0A'))
-          PY
-
   build:
     runs-on: ubuntu-latest
     outputs:
@@ -103,6 +36,7 @@ jobs:
           assert (root / 'sw.js').is_file(), 'Ablösung des früheren Demo-Offline-Workers fehlt'
           assert (root / '_v/update.html').is_file(), 'Direkter Aktualisierungsweg fehlt'
           assert (root / 'CNAME').read_text().strip() == 'demo.kundenzettel.de'
+          assert sorted(p.relative_to(root / 'alt').as_posix() for p in (root / 'alt').rglob('*') if p.is_file()) == ['index.html'], 'Alte Archiv-Demo darf nicht veröffentlicht werden'
           for item in release['files']:
               path = (root / item['path']).resolve()
               assert root.resolve() in path.parents
@@ -118,8 +52,7 @@ jobs:
           path: site
 
   deploy:
-    needs: [build, certificate]
-    if: always() && needs.build.result == 'success' && (needs.certificate.result == 'success' || needs.certificate.result == 'skipped')
+    needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment:
@@ -198,11 +131,6 @@ jobs:
                   print('DNS, Zertifikat oder Pages-Veröffentlichung noch nicht bereit:', type(error).__name__)
                   time.sleep(10)
           PY
-      - name: HTTPS nach einer Zertifikatserneuerung aktivieren
-        if: github.event_name == 'workflow_dispatch' && inputs.renew_certificate
-        env:
-          GH_TOKEN: ${{ secrets.PAGES_ADMIN_TOKEN }}
-        run: gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -F https_enforced=true
       - name: HTTPS-Erzwingung bestätigen
         env:
           GH_TOKEN: ${{ github.token }}

@@ -1,31 +1,27 @@
 # Kundenzettel-Demo
 
-Dieses öffentliche Repository veröffentlicht ausschließlich die geprüften statischen Browserdateien aus `site/` unter https://demo.kundenzettel.de/. `site/release.json` benennt den zugehörigen Commit des privaten Quellrepositories Moinwerk/Kundenzettel, Branch `feat/kundenzettel-ui-kit-demo`.
+Öffentliche Gestaltungsvorschau mit zwei fiktiven Gesprächen. Veröffentlicht wird ausschließlich `site/` aus diesem GitHub-Repository. Keine echten Kundendaten und keine WhatsApp- oder Modellanfragen.
 
-Die Demo zeigt fiktive Gesprächs- und Auftragsdaten. Lokale Testnachrichten bleiben im Browser; der Build enthält keinen Worker, keine API-Zugangsdaten und führt keine OpenAI- oder WhatsApp-Anfragen aus. Die geschützte Betreiber-App und API bleiben auf Cloudflare.
+| Adresse | Aufgabe |
+| --- | --- |
+| https://demo.kundenzettel.de/ | Aktuelle Demo auf GitHub Pages |
+| https://www.demo.kundenzettel.de/ | Cloudflare-Weiterleitung mit eigenem Zertifikat zur aktuellen Demo |
+| https://kundenzettel.de/ | Separate Produktwebsite aus `mat-ai-sch/kundenzettel-website` |
 
-## Aktualisierung
+## Veröffentlichung
 
-Im privaten Quellrepository die Vorschau bauen und prüfen. `scripts/github-pages/prepare-demo.py` bereitet die Browserdateien, Rechtsseiten, Lizenzhinweise und die Veröffentlichungskennung vor. Danach den geprüften Inhalt von `site/` in diesem Repository aktualisieren und nach `main` pushen.
+Der private Quellcode liegt in `Moinwerk/Kundenzettel`, Branch `feat/kundenzettel-ui-kit-demo`. `site/release.json` enthält den geprüften Quellcommit und die Hashes der veröffentlichten Dateien. Verpackungsänderungen werden getrennt als `packagingRevision` benannt.
 
-Der Workflow `.github/workflows/pages.yml` prüft die Dateihashes, veröffentlicht `site/` über GitHub Pages und prüft beide HTTPS-Adressen auf den passenden Quellstand. Ein manueller Workflowstart veröffentlicht dieselben bereits eingecheckten Dateien. Änderungen an der Hauptwebsite lösen keine Demo-Aktualisierung aus.
+Der Pages-Workflow prüft die Dateien, veröffentlicht `site/` und prüft danach beide HTTPS-Adressen samt kanonischer Weiterleitung. Ein Push nach `main` oder ein manueller Workflowstart genügt. Die Zertifikatsverwaltung für `www.demo` liegt bei Cloudflare; der Workflow verändert keine Domains und benötigt keinen zusätzlichen Administrationstoken.
 
-`https://www.demo.kundenzettel.de/` ist als Alias der kanonischen Demo-Adresse vorgesehen. Beide DNS-Einträge zeigen auf GitHub Pages. Der Workflow protokolliert die echte TLS-Verbindung beider Adressen und prüft, dass der Alias zur kanonischen Adresse weiterleitet. Eine Cloudflare-Weiterleitung ist im privaten Quellrepository als Alternative vorbereitet, aber nicht aktiviert.
+## Alte Browseransichten aktualisieren
 
-Bei einem fehlenden Zertifikat für den www-Alias kann ein Administrator die Domain in Settings → Pages entfernen und sofort wieder als `demo.kundenzettel.de` speichern; anschließend HTTPS erneut aktivieren. Die automatisierte Alternative mit `renew_certificate:true` benötigt zuvor das Repository-Secret `PAGES_ADMIN_TOKEN` mit Pages: write und Administration: write für genau dieses Repository. Ohne diesen zusätzlichen Token nimmt der Workflow keine Domainänderung vor. Normale Veröffentlichungen benötigen diesen Token nicht. Nach erfolgreicher Dateiprüfung entfernt er ausschließlich die erwartete Custom Domain und stellt sie sofort wieder her, um die Ausstellung gemäß GitHub-Dokumentation neu anzufordern. Die Domain kann dabei kurzzeitig nicht erreichbar sein. Normale Pushes erneuern das Zertifikat nicht. Erst die abschließende unabhängige TLS-Prüfung bestätigt die Live-Veröffentlichung beider Adressen; danach wird HTTPS erneut erzwungen.
+https://demo.kundenzettel.de/_v/update.html löst ausschließlich die alte Root-Service-Worker-Registrierung ab und öffnet die aktuelle Demo. Lokale Browserdaten bleiben erhalten. `/sw.js` beendet den früheren Offline-Betrieb beim nächsten Browser-Update. Der Cloudflare-Weiterleitungsworker liefert diese beiden Migrationspfade gleich-originig aus.
 
-## Wechsel von der bisherigen Offline-Demo
+## Historische Version
 
-Die frühere Demo konnte ihre alte Oberfläche aus einem bereits installierten Workbox-Cache anzeigen, obwohl auf dem Server neue Dateien lagen. `site/sw.js` löst diesen alten Offline-Worker ab. Für den sofortigen Wechsel gibt es https://demo.kundenzettel.de/_v/update.html; dieser Pfad umgeht den früheren Dokument-Cache, meldet nur die Root-Registrierung dieser Demo ab und öffnet den aktuellen Stand. Lokale Browserdaten werden nicht gelöscht. Der private Quellstand enthält einen Browser-Regressionstest für bereits besuchte und frische Profile auf Desktop und Mobil.
+Die frühere GitLab-Oberfläche bleibt unter `archive/gitlab-demo-20261012/` im Repository erhalten. Sie gehört **nicht** zum öffentlichen Pages-Paket. Der frühere Webpfad `/alt/` öffnet die aktuelle Demo. Kein zukünftiger Release darf das Archiv erneut nach `site/` kopieren.
 
-## Archiv: alte GitLab-Oberfläche
+## Zuständigkeiten
 
-https://demo.kundenzettel.de/alt/ öffnet parallel die bisherige Oberfläche. Sie wurde aus dem übernommenen Website-Commit `326b0ebb52e59833ff23becd63cd248eb9fd8745` gebaut, auf den auch der vorherige Demo-Workflow zugriff. `site/alt/archive.json` dokumentiert diesen Ursprung. Der Build nutzt `VITE_PUBLIC_SURFACE=whatsapp`, `VITE_RUNTIME_MODE=preview` und den Asset-Basispfad `/alt/`. Nur Asset-Pfade, eigene Speicherkennungen und die Entfernung der Offline-Registrierung wurden für die parallele Vorschau angepasst; das alte Design bleibt erhalten. Die aktuelle Oberfläche an der Startadresse bleibt unverändert.
-
-Bei künftigen Veröffentlichungen `site/alt/` als unabhängiges Archiv erhalten und seine Dateien erneut in die Hashliste von `site/release.json` aufnehmen. Keine alten Root-Dateien oder Root-Service-Worker zurückspielen.
-
-## Informationen: Q&A-Board
-
-Der aktuelle Stand enthält unter `#/informationen` zwölf redaktionell geprüfte Fragen, Beispielfragen und ein Fragefeld, das vorhandene Antworten im Browser findet. Geplante Module stehen getrennt darunter. Bis zu fünf Frage-Antwort-Paare bleiben nur im flüchtigen Zustand der geöffneten Informationsansicht. Fragen werden nicht dauerhaft gespeichert oder an externe Anbieter gesendet. Die Businessansicht bündelt Fragen in vier Themencluster und begrenzt die Inhaltsbreite auf 1120 px. Desktop nutzt eine eigenständig scrollende Wissensspalte sowie ein Chatpanel mit festem Kopf und fester Eingabe; nur die Beiträge scrollen. Geplante Themen wie Kalender sind auffindbar und ausdrücklich als noch nicht verfügbar gekennzeichnet. Mobil beginnen die häufigen Fragen; Fragefeld und Modulausblick folgen in derselben Lesefläche. Die Desktop-Zeile „Dein Arbeitsplatz“ entfällt, die mobile Kopfzeile bleibt erhalten.
-
-Die Desktop-Kopfleiste enthält Impressum, Datenschutz und Kontakt als unterstrichene Servicegruppe zwischen Gesprächen und Aufträgen. Der zusätzliche Vorschau-Badge und der doppelte Kontaktname neben der äußeren Chatüberschrift entfallen. Die kompakte Glasnavigation bleibt 840 px breit; Mobilnavigation und Kontaktname im eigentlichen Chat bleiben erhalten.
+GitHub ist die Quelle der öffentlichen Inhalte. Cloudflare verwaltet DNS, die www-Demo-Weiterleitung und den getrennten geschützten Backendbetrieb. IONOS bleibt Domainregistrar. GitLab-Pages und GitLab-CI/CD sind abgeschaltet.

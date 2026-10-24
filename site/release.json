@@ -15,6 +15,10 @@
       "sha256": "195483bc6c218d77c4c540f7aac7bb2ce2e8c67e48d3352e6322b7235a02345b"
     },
     {
+      "path": "alt/index.html",
+      "sha256": "7727cec93bf2efb8d1df187fb9cc91e08ae773ceda96ae55fb39fa00319d2626"
+    },
+    {
       "path": "assets/coex-preview-C6iAJXt9.css",
       "sha256": "929c397c7eb1c516836ea18680e690614c2a4015cb12d1e838efa202b3cfcc44"
     },
@@ -122,5 +126,6 @@
       "path": "sw.js",
       "sha256": "be039855be06423f84adeec02d20139ee84d41cc969e026783527c4e5b6d7647"
     }
-  ]
+  ],
+  "packagingRevision": "2026-10-24-domain-cleanup"
 }
