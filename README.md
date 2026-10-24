@@ -6,7 +6,7 @@
 | --- | --- |
 | https://demo.kundenzettel.de/ | Aktuelle Demo auf GitHub Pages |
 | https://www.demo.kundenzettel.de/ | Cloudflare-Weiterleitung mit eigenem Zertifikat zur aktuellen Demo |
-| https://kundenzettel.de/ | Separate Produktwebsite aus `mat-ai-sch/kundenzettel-website` |
+| https://kundenzettel.de/ | Einstieg zur aktuellen Demo; Rechtsseiten aus `mat-ai-sch/kundenzettel-website` |
 
 ## Veröffentlichung
 
@@ -18,10 +18,10 @@ Der Pages-Workflow prüft die Dateien, veröffentlicht `site/` und prüft danach
 
 https://demo.kundenzettel.de/_v/update.html löst ausschließlich die alte Root-Service-Worker-Registrierung ab und öffnet die aktuelle Demo. Lokale Browserdaten bleiben erhalten. `/sw.js` beendet den früheren Offline-Betrieb beim nächsten Browser-Update. Der Cloudflare-Weiterleitungsworker liefert diese beiden Migrationspfade gleich-originig aus.
 
-## Historische Version
+## Ausschließlich aktuelle Oberfläche
 
-Die frühere GitLab-Oberfläche bleibt unter `archive/gitlab-demo-20261012/` im Repository erhalten. Sie gehört **nicht** zum öffentlichen Pages-Paket. Der frühere Webpfad `/alt/` öffnet die aktuelle Demo. Kein zukünftiger Release darf das Archiv erneut nach `site/` kopieren.
+Die frühere Oberfläche samt Landingpage und Medien wurde aus dem aktuellen Repository-Stand entfernt. Der frühere Webpfad `/alt/` öffnet die aktuelle Demo. Die CI verhindert, dass eine Archiv-Oberfläche erneut aufgenommen wird.
 
 ## Zuständigkeiten
 
-GitHub ist die Quelle der öffentlichen Inhalte. Cloudflare verwaltet DNS, die www-Demo-Weiterleitung und den getrennten geschützten Backendbetrieb. IONOS bleibt Domainregistrar. GitLab-Pages und GitLab-CI/CD sind abgeschaltet.
+GitHub ist die Quelle der öffentlichen Inhalte. Cloudflare verwaltet DNS, die www-Demo-Weiterleitung und den getrennten geschützten Backendbetrieb. IONOS bleibt Domainregistrar. Die Veröffentlichung erfolgt ausschließlich durch GitHub Actions und GitHub Pages.

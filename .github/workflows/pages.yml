@@ -25,7 +25,8 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           from hashlib import sha256
-          import json, os
+          import json, os, subprocess
+          assert not subprocess.check_output(['git', 'ls-files', 'archive'], text=True).strip(), 'Archiv-Oberfläche darf nicht zurückkehren'
           root = Path('site')
           release = json.loads((root / 'release.json').read_text())
           assert release['mode'] == 'static-preview'
@@ -70,6 +71,9 @@ jobs:
         run: |
           python3 - <<'PY'
           import hashlib, json, os, urllib.request
+          opener = urllib.request.build_opener()
+          opener.addheaders = [('User-Agent', 'Kundenzettel-GitHub-CI/1.0')]
+          urllib.request.install_opener(opener)
           for host in ['demo.kundenzettel.de', 'www.demo.kundenzettel.de']:
               try:
                   with urllib.request.urlopen(f'https://{host}/release.json?verify=' + os.environ['EXPECTED_SOURCE_COMMIT'], timeout=15) as response:
@@ -99,6 +103,9 @@ jobs:
         run: |
           python3 - <<'PY'
           import hashlib, json, os, time, urllib.request, urllib.parse
+          opener = urllib.request.build_opener()
+          opener.addheaders = [('User-Agent', 'Kundenzettel-GitHub-CI/1.0')]
+          urllib.request.install_opener(opener)
           expected = os.environ['EXPECTED_SOURCE_COMMIT']
           deadline = time.monotonic() + 600
           for attempt in range(60):
